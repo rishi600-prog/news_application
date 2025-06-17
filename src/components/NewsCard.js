@@ -1,4 +1,4 @@
-export default function NewsCard({ article }) {
+function NewsCard({ article }) {
   return (
     <div className="bg-white rounded shadow p-4 flex flex-col hover:shadow-lg transition-all duration-200">
       <img src={article.urlToImage || 'https://via.placeholder.com/400'} alt="news" className="w-full h-48 object-cover rounded" />
@@ -8,3 +8,5 @@ export default function NewsCard({ article }) {
     </div>
   );
 }
+
+export default NewsCard;
