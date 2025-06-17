@@ -1,28 +1,35 @@
-import countries from '../data/countries';
+import React from "react";
+import { Search } from "lucide-react";
 
-const categories = ['general', 'business', 'technology', 'sports', 'entertainment'];
+const categories = ["General", "Technology", "Health", "Business", "Sports", "Science", "Entertainment"];
 
-const Navbar = function Navbar({ onCategoryChange, onCountryChange, onSearch }) {
+function Navbar() {
   return (
-    <nav className="bg-blue-800 text-white px-6 py-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
-      <h1 className="text-2xl font-bold">🌍 NewsFlash</h1>
-      <div className="flex gap-4">
-        <select onChange={(e) => onCountryChange(e.target.value)} className="text-black px-2 py-1 rounded">
-          <option value="">All Countries</option>
-          {countries.map(c => <option key={c.code} value={c.code}>{c.name}</option>)}
-        </select>
+    <header className="bg-white shadow sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-blue-600">NewsXpress</h1>
 
-        <select onChange={(e) => onCategoryChange(e.target.value)} className="text-black px-2 py-1 rounded">
-          {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-        </select>
+        <nav className="hidden md:flex space-x-4">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className="text-gray-600 hover:text-blue-500 transition font-medium"
+            >
+              {cat}
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex items-center space-x-2">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="px-3 py-1 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <Search className="text-gray-500" size={20} />
+        </div>
       </div>
-      <input
-        type="text"
-        placeholder="Search keywords..."
-        onChange={(e) => onSearch(e.target.value)}
-        className="text-black px-3 py-1 rounded w-full md:w-1/3"
-      />
-    </nav>
+    </header>
   );
 }
 
