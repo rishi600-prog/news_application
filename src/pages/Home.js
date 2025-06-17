@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../components/NewsCard";
 
+const apiKey = process.env.REACT_APP_NEWS_API_KEY;
+
 function Home() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=YOUR_API_KEY`
+      `https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=${apiKey}` // Fetching top headlines from the US
     )
       .then((res) => res.json())
       .then((data) => {
-        setArticles(data.articles);
+        if (data.articles) {
+          setArticles(data.articles);
+        } else {
+          setArticles([]);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching news:", error);
+        setArticles([]);
         setLoading(false);
       });
   }, []);
@@ -22,12 +33,14 @@ function Home() {
 
       {loading ? (
         <p className="text-center text-gray-500">Loading news...</p>
-      ) : (
+      ) : articles && articles.length > 0 ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {articles.map((article, index) => (
             <NewsCard key={index} article={article} />
           ))}
         </div>
+      ) : (
+        <p className="text-center text-gray-500">No news articles found.</p>
       )}
     </section>
   );
