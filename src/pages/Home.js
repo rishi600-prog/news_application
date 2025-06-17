@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import NewsCard from '../components/NewsCard';
 import Footer from '../components/Footer';
-import { fetchNews } from '../api/news';
+import fetchNews from '../api/news';
 
 function Home() {
   const [articles, setArticles] = useState([]);
