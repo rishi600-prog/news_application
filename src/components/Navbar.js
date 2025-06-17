@@ -2,7 +2,7 @@ import countries from '../data/countries';
 
 const categories = ['general', 'business', 'technology', 'sports', 'entertainment'];
 
-function Navbar({ onCategoryChange, onCountryChange, onSearch }) {
+const Navbar = function Navbar({ onCategoryChange, onCountryChange, onSearch }) {
   return (
     <nav className="bg-blue-800 text-white px-6 py-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
       <h1 className="text-2xl font-bold">🌍 NewsFlash</h1>
