@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../components/NewsCard";
 
-export default function Home({ country, category, query, resetTrigger }) {
+const Home = function Home({ country, category, query, resetTrigger }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -56,3 +56,5 @@ export default function Home({ country, category, query, resetTrigger }) {
     </section>
   );
 }
+
+export default Home

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NewsCard({ article }) {
+const NewsCard = function NewsCard({ article }) {
   const { title, description, url, image, source, publishedAt } = article;
 
   return (
@@ -30,3 +30,5 @@ export default function NewsCard({ article }) {
     </a>
   );
 }
+
+export default NewsCard;

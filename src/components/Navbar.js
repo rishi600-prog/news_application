@@ -1,13 +1,6 @@
 import React from "react";
 import { Search } from "lucide-react";
-
-const countries = [
-  { code: "us", label: "USA" },
-  { code: "in", label: "India" },
-  { code: "gb", label: "UK" },
-  { code: "au", label: "Australia" },
-  { code: "ca", label: "Canada" },
-];
+import countries from "../data/countries";
 
 const categories = [
   "general",
@@ -20,7 +13,7 @@ const categories = [
   "health",
 ];
 
-export default function Navbar({
+const Navbar = function Navbar({
   country,
   setCountry,
   category,
@@ -111,3 +104,4 @@ export default function Navbar({
   );
 }
 
+export default Navbar;
