@@ -13,8 +13,8 @@ NewsXpress is a responsive news application built with React and Tailwind CSS. I
 
 ---
 
-## 🚀 Live Demo
+##  Live Demo
 
-> 👉 [Click to view the app](https://your-live-url.render.com/)  
+>  [Click to view the app](https://your-live-url.render.com/)  
 
 ---
