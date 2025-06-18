@@ -35,9 +35,20 @@ export default function Navbar({
     if (query.trim()) setSearchQuery(query);
   };
 
+  const handleSearchEnter = (e) => {
+    if (e.key === "Enter" && query.trim()) {
+      setSearchQuery(query);
+    }
+  };
+
   const handleCategoryClick = (cat) => {
-    setCategory(cat);
     setSearchQuery("");
+    setCategory(cat);
+  };
+
+  const handleCountryChange = (val) => {
+    setSearchQuery("");
+    setCountry(val);
   };
 
   return (
@@ -52,8 +63,8 @@ export default function Navbar({
 
         <div className="flex items-center gap-3 flex-wrap">
           <select
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            value={searchQuery ? "" : country}
+            onChange={(e) => handleCountryChange(e.target.value)}
             className="border rounded px-2 py-1 bg-[#2b2b2b] text-white border-gray-600 hover:border-blue-400 focus:outline-none"
           >
             {countries.map((c) => (
@@ -69,7 +80,7 @@ export default function Navbar({
                 key={cat}
                 onClick={() => handleCategoryClick(cat)}
                 className={`px-3 py-1 rounded-full font-medium text-sm transition-colors whitespace-nowrap ${
-                  category === cat
+                  category === cat && !searchQuery
                     ? "bg-blue-600 text-white"
                     : "bg-gray-700 hover:bg-blue-500 text-white"
                 }`}
@@ -86,6 +97,7 @@ export default function Navbar({
               placeholder="Search news..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleSearchEnter}
             />
             <Search
               size={20}
@@ -98,3 +110,4 @@ export default function Navbar({
     </header>
   );
 }
+

@@ -4,19 +4,25 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 
 function App() {
-  const [country, setCountry] = useState("us");
+  const [country, setCountry] = useState("in");
   const [category, setCategory] = useState("general");
   const [query, setQuery] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [resetTrigger, setResetTrigger] = useState(0);
 
   useEffect(() => {
-    // Reset search query when country changes
-    setSearchQuery("");
-  }, [country]);
+    if (!query) {
+      setSearchQuery("");
+      setResetTrigger((prev) => prev + 1);
+    }
+  }, [country, category]);
 
   const resetToHome = () => {
+    setCountry("in");
+    setCategory("general");
     setQuery("");
     setSearchQuery("");
+    setResetTrigger((prev) => prev + 1);
   };
 
   return (
@@ -37,6 +43,7 @@ function App() {
           country={country}
           category={category}
           query={searchQuery}
+          resetTrigger={resetTrigger}
         />
       </main>
       <Footer />
