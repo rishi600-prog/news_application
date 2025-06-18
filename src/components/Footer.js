@@ -1,18 +1,17 @@
 import React from "react";
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="bg-white text-gray-500 text-sm text-center py-6 border-t">
-      <div className="max-w-7xl mx-auto px-4">
-        <p>
-          &copy; {new Date().getFullYear()} <span className="font-semibold">NewsXpress</span>. All rights reserved.
-        </p>
+      <div className="max-w-7xl mx-auto">
+        <p>&copy; {new Date().getFullYear()} NewsXpress. All rights reserved.</p>
         <p className="mt-1">
-          Powered by <a href="https://newsapi.org" className="text-blue-500 hover:underline">NewsAPI.org</a>
+          Powered by{" "}
+          <a href="https://gnews.io" className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
+            GNews.io
+          </a>
         </p>
       </div>
     </footer>
   );
 }
-
-export default Footer;

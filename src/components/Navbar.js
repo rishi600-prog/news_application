@@ -1,36 +1,100 @@
 import React from "react";
 import { Search } from "lucide-react";
 
-const categories = ["General", "Technology", "Health", "Business", "Sports", "Science", "Entertainment"];
+const countries = [
+  { code: "us", label: "USA" },
+  { code: "in", label: "India" },
+  { code: "gb", label: "UK" },
+  { code: "au", label: "Australia" },
+  { code: "ca", label: "Canada" },
+];
 
-function Navbar() {
+const categories = [
+  "general",
+  "world",
+  "business",
+  "technology",
+  "entertainment",
+  "sports",
+  "science",
+  "health",
+];
+
+export default function Navbar({
+  country,
+  setCountry,
+  category,
+  setCategory,
+  query,
+  setQuery,
+  searchQuery,
+  setSearchQuery,
+  resetToHome,
+}) {
+  const handleSearchClick = () => {
+    if (query.trim()) setSearchQuery(query);
+  };
+
+  const handleCategoryClick = (cat) => {
+    setCategory(cat);
+    setSearchQuery("");
+  };
+
   return (
-    <header className="bg-white shadow sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-blue-600">NewsXpress</h1>
+    <header className="bg-[#1f1f1f] shadow sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-4">
+        <h1
+          className="text-2xl font-bold text-blue-400 cursor-pointer hover:text-blue-500 transition-colors"
+          onClick={resetToHome}
+        >
+          NewsXpress
+        </h1>
 
-        <nav className="hidden md:flex space-x-4">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className="text-gray-600 hover:text-blue-500 transition font-medium"
-            >
-              {cat}
-            </button>
-          ))}
-        </nav>
+        <div className="flex items-center gap-3 flex-wrap">
+          <select
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            className="border rounded px-2 py-1 bg-[#2b2b2b] text-white border-gray-600 hover:border-blue-400 focus:outline-none"
+          >
+            {countries.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.label}
+              </option>
+            ))}
+          </select>
 
-        <div className="flex items-center space-x-2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-3 py-1 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <Search className="text-gray-500" size={20} />
+          <nav className="flex gap-2 overflow-x-auto">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleCategoryClick(cat)}
+                className={`px-3 py-1 rounded-full font-medium text-sm transition-colors whitespace-nowrap ${
+                  category === cat
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-700 hover:bg-blue-500 text-white"
+                }`}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center border border-gray-600 rounded-full px-2 py-1 w-64 bg-[#2b2b2b]">
+            <input
+              type="text"
+              className="flex-grow px-2 outline-none bg-transparent text-white"
+              placeholder="Search news..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <Search
+              size={20}
+              className="cursor-pointer text-gray-400 hover:text-blue-400 active:text-blue-600 transition-colors"
+              onClick={handleSearchClick}
+            />
+          </div>
         </div>
       </div>
     </header>
   );
 }
-
-export default Navbar;
