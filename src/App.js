@@ -15,7 +15,7 @@ function App() {
       setSearchQuery("");
       setResetTrigger((prev) => prev + 1);
     }
-  }, [country, category]);
+  }, [country, category, query]);
 
   const resetToHome = () => {
     setCountry("in");
